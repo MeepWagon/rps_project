@@ -6,9 +6,7 @@ Window window {
   default-height: 300;
   resizable: false;
 
-  Fixed {
-    
-  }
+  Fixed {}
 
   Box welcome {
     orientation: vertical;
@@ -18,13 +16,14 @@ Window window {
     Label {
       label: _("Welcome d workbench");
       margin-bottom: 30;
+
       styles [
         "title-1",
       ]
     }
-    
+
     Image {
-      file: "document-open";
+      file: "images/loading.svg";
     }
   }
 }
