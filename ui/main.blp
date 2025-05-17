@@ -1,0 +1,30 @@
+using Gtk 4.0;
+
+Window window {
+  title: "Window";
+  default-width: 400;
+  default-height: 300;
+  resizable: false;
+
+  Fixed {
+    
+  }
+
+  Box welcome {
+    orientation: vertical;
+    valign: center;
+    halign: center;
+
+    Label {
+      label: _("Welcome d workbench");
+      margin-bottom: 30;
+      styles [
+        "title-1",
+      ]
+    }
+    
+    Image {
+      file: "document-open";
+    }
+  }
+}
