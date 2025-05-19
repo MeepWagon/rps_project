@@ -2,28 +2,99 @@ using Gtk 4.0;
 
 Window window {
   title: "Window";
-  default-width: 400;
-  default-height: 300;
+  default-width: 540;
+  default-height: 408;
   resizable: false;
 
-  Fixed {}
-
-  Box welcome {
+  Box {
     orientation: vertical;
-    valign: center;
+    valign: start;
     halign: center;
+    margin-top: 4;
 
     Label {
-      label: _("Welcome d workbench");
-      margin-bottom: 30;
+      label: _("Rock, Paper, Scissors!");
+      margin-bottom: 12;
 
       styles [
-        "title-1",
+        "title-font",
       ]
     }
 
-    Image {
-      file: "images/loading.svg";
+    Separator {}
+
+    Box {
+      orientation: horizontal;
+      spacing: 28;
+
+      Box {
+        orientation: vertical;
+
+        Label {
+          margin-top: 12;
+          margin-bottom: 6;
+          label: _("Your Selection");
+
+          styles [
+            "font-size-1",
+          ]
+        }
+
+        Image selection-icon {
+          icon-name: "edit-cut";
+          pixel-size: 120;
+        }
+
+        Box {
+          margin-top: 18;
+          spacing: 8;
+
+          Button rock {
+            Image {
+              icon-name: "edit-cut";
+              pixel-size: 35;
+            }
+          }
+
+          Button paper {
+            Image {
+              icon-name: "edit-cut";
+              pixel-size: 35;
+            }
+          }
+
+          Button scissors {
+            Image {
+              icon-name: "edit-cut";
+              pixel-size: 35;
+            }
+          }
+        }
+      }
+
+      Box {
+        orientation: vertical;
+
+        Label {
+          margin-top: 12;
+          margin-bottom: 6;
+          label: _("CPU's Selection");
+
+          styles [
+            "font-size-1",
+          ]
+        }
+
+        Image c-selection-icon {
+          icon-name: "edit-cut";
+          pixel-size: 120;
+        }
+
+        Button selection-confirm {
+          margin-top: 25;
+          label: _("Confirm Selection");
+        }
+      }
     }
   }
 }
