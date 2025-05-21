@@ -1,3 +1,5 @@
+#include "gtk-4.0/gtk/gtk.h"
+
 #include "libgen.h"
 #include "stdio.h"
 
@@ -36,4 +38,16 @@ GtkWidget* find_first_child_of_widget(GtkWidget* Container, char id) {
     }
     
     return NULL;
+}
+
+void load_icon(char* icon_id, char* asset_name) {
+    // Note: Eventually, I want all the images to be loaded using
+    // a gresource file. Or, a macro that says to load resources
+    // using a gresource file.
+    int image_buffer_max = 428;
+    char* image_path_buffer[image_buffer_max];
+    get_exe_dir(image_path_buffer, image_buffer_max);
+    
+    char* image_path = g_build_filename(image_path_buffer, "assets", "loading.svg", NULL);
+    gtk_image_set_from_file(GTK_WIDGET(gtk_builder_get_object(builder, icon_id)), image_path);
 }
