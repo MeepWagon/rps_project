@@ -11,6 +11,7 @@ build: $(ui_files) $(src_files)
 	mkdir -p $(build_path)
 	cp -r ui/assets $(build_path)
 	blueprint-compiler compile $(ui_path) > $(build_path)/main.ui
+	cp ui/*.css $(build_path)
 	gcc src/*.c -o $(build_path)/$(application_name) $(build_flags)
 
 clean:
