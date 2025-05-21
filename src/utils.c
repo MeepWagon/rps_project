@@ -18,3 +18,22 @@ void get_ui_path(char* buffer, int buffer_max) {
     get_exe_dir(buffer, buffer_max);
     sprintf(buffer, "%s%s", buffer, "/main.ui");
 }
+
+// Note: Maybe it would be better to implement a searching algorithm for this?
+// Usage: find_first_child_of_widget(parent_widget*, widget_id)
+GtkWidget* find_first_child_of_widget(GtkWidget* Container, char id) {
+    GtkWidget* child = get_widget_first_child(Container);
+    if (child == NULL) {
+        g_error("Container has no children");
+    }
+
+    while (child != NULL) {
+        if (gtk_widget_get_name(child) != id) {
+            child = gtk_widget_get_next_sibling(child);
+        } else {
+            return child;
+        }
+    }
+    
+    return NULL;
+}
