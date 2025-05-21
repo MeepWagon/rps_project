@@ -58,11 +58,7 @@ void app_activate(GtkApplication *app, gpointer user_data) {
         GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
     );
 
-    buttondata* data = g_new(buttondata, 1);
-    data->box = csidebox;
-    if (csidebox == NULL) {
-        g_error("Failed to get c-side box from builder");
-    }
+    confirm_data* data = g_new(confirm_data, 1);
     data->success = true;
     data->after_element = c_selection_icon;
     g_signal_connect(button, "clicked", G_CALLBACK(on_selection_confirm), data);
