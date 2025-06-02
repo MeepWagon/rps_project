@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <requires lib="gtk" version="4.0"/>
+  <object class="GtkWindow" id="window">
+    <property name="title">Window</property>
+    <property name="default-width">540</property>
+    <property name="default-height">408</property>
+    <property name="resizable">false</property>
+    <child>
+      <object class="GtkBox">
+        <property name="orientation">1</property>
+        <property name="valign">1</property>
+        <property name="halign">3</property>
+        <property name="margin-top">4</property>
+        <child>
+          <object class="GtkLabel">
+            <property name="label" translatable="yes">Rock, Paper, Scissors!</property>
+            <property name="margin-bottom">12</property>
+            <style>
+              <class name="title-font"/>
+            </style>
+          </object>
+        </child>
+        <child>
+          <object class="GtkSeparator"></object>
+        </child>
+        <child>
+          <object class="GtkBox">
+            <property name="orientation">0</property>
+            <property name="spacing">28</property>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">1</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">6</property>
+                    <property name="label" translatable="yes">Your Selection</property>
+                    <style>
+                      <class name="font-size-1"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage" id="selection-icon">
+                    <property name="icon-name">edit-cut</property>
+                    <property name="pixel-size">120</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkBox">
+                    <property name="margin-top">18</property>
+                    <property name="spacing">8</property>
+                    <child>
+                      <object class="GtkButton" id="rock">
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">edit-cut</property>
+                            <property name="pixel-size">35</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="paper">
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">edit-cut</property>
+                            <property name="pixel-size">35</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkButton" id="scissors">
+                        <child>
+                          <object class="GtkImage">
+                            <property name="icon-name">edit-cut</property>
+                            <property name="pixel-size">35</property>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkBox">
+                <property name="orientation">1</property>
+                <child>
+                  <object class="GtkLabel">
+                    <property name="margin-top">12</property>
+                    <property name="margin-bottom">6</property>
+                    <property name="label" translatable="yes">CPU's Selection</property>
+                    <style>
+                      <class name="font-size-1"/>
+                    </style>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkImage" id="c-selection-icon">
+                    <property name="icon-name">edit-cut</property>
+                    <property name="pixel-size">120</property>
+                  </object>
+                </child>
+                <child>
+                  <object class="GtkButton" id="selection-confirm">
+                    <property name="margin-top">25</property>
+                    <property name="label" translatable="yes">Confirm Selection</property>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
