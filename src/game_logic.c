@@ -16,7 +16,6 @@ void on_selection(GtkWidget* button, gpointer data) {
     selection_data* select_data = (selection_data*)data;
     player_selection = select_data->selection_number;
     
-    
     // Change selection icon
     if (player_selection == 1) {
 	load_icon(select_data->image, "rock.svg");
@@ -41,12 +40,12 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
     }
     
     // CPU selects an option & changes CPU selection icon
-    cpu_selection = rand() % 3;
-    if (cpu_selection == 1) {
+    cpu_selection = rand() % 2;
+    if (cpu_selection == 0) {
 	load_icon(button_data->after_element, "rock.svg");
-    } else if (cpu_selection == 2) {
+    } else if (cpu_selection == 1) {
 	load_icon(button_data->after_element, "paper.svg");
-    } else if (cpu_selection == 3) {
+    } else if (cpu_selection == 2) {
 	load_icon(button_data->after_element, "scissors.svg");
     }
     
@@ -73,7 +72,6 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
     } else {
 	gtk_widget_set_visible(result_label, true);
     }
-    
     
     g_object_set(button, "label", "Restart Game?", NULL);
     game_state = !game_state;
