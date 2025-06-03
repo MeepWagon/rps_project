@@ -9,9 +9,13 @@ GdkDisplay* display;
 GtkWidget* image;
 GtkBuilder* builder;
 GtkCssProvider* provider;
-GtkWidget* button;
 GtkBox* csidebox;
 GtkWidget* c_selection_icon;
+
+GtkWidget* confirm_button;
+GtkWidget* rock_button;
+GtkWidget* paper_button;
+GtkWidget* scissors_button;
 
 void app_activate(GtkApplication *app, gpointer user_data) {
     // Get UI file path
@@ -24,26 +28,23 @@ void app_activate(GtkApplication *app, gpointer user_data) {
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
     provider = gtk_css_provider_new();
     display = gdk_display_get_default();
-    button = GTK_WIDGET(gtk_builder_get_object(builder, "selection-confirm"));
+    if (!display) {
+	g_error("Failed to get default display");
+    }
+    confirm_button = GTK_WIDGET(gtk_builder_get_object(builder, "selection-confirm"));
     csidebox = GTK_BOX(gtk_builder_get_object(builder, "c-side"));
+
     c_selection_icon = GTK_WIDGET(gtk_builder_get_object(builder, "c-selection-icon"));
+    image = GTK_WIDGET(gtk_builder_get_object(builder, "selection-icon"));
+
+    rock_button = GTK_WIDGET(gtk_builder_get_object(builder, "rock"));
+    paper_button = GTK_WIDGET(gtk_builder_get_object(builder, "paper"));
+    scissors_button = GTK_WIDGET(gtk_builder_get_object(builder, "scissors"));
 
     // Configure window
     gtk_window_set_application(GTK_WINDOW(window), app);
-    gtk_window_set_title (GTK_WINDOW (window), "RPS Project");
+    gtk_window_set_title(GTK_WINDOW (window), "RPS Project");
     gtk_window_present(GTK_WINDOW (window));
-
-    
-    // Load "loading.svg" icon
-    // Note: Eventually, I want all the images to be loaded using
-    // a gresource file. Or, a special rule to load everything via a
-    // gresource file.
-    // int image_buffer_max = 428;
-    // char* image_path_buffer[image_buffer_max];
-    // get_exe_dir(image_path_buffer, image_buffer_max);
-    // image = GTK_WIDGET(gtk_builder_get_object(builder, "test_icon"));
-    // char* image_path = g_build_filename(image_path_buffer, "assets", "loading.svg", NULL);
-    // gtk_image_set_from_file(GTK_IMAGE(image), image_path);
     
     // Load CSS
     // change "build/main.css", not portable.
@@ -58,13 +59,30 @@ void app_activate(GtkApplication *app, gpointer user_data) {
         GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
     );
 
+    // Eventually, make a datatypes.c for these
     confirm_data* data = g_new(confirm_data, 1);
-    data->success = true;
     data->after_element = c_selection_icon;
-    g_signal_connect(button, "clicked", G_CALLBACK(on_selection_confirm), data);
+    g_signal_connect(confirm_button, "clicked", G_CALLBACK(on_selection_confirm), data);
+
+    selection_data* rock_data = g_new(selection_data, 1);
+    rock_data->image = image;
+    rock_data->selection_number = 0; 
+    g_signal_connect(rock_button, "clicked", G_CALLBACK(on_selection), (gpointer)rock_data);
+
+    selection_data* paper_data = g_new(selection_data, 1);
+    paper_data->image = image;
+    paper_data->selection_number = 1;
+    g_signal_connect(paper_button, "clicked", G_CALLBACK(on_selection), (gpointer)paper_data);
+
+    selection_data* scissors_data = g_new(selection_data, 1);
+    scissors_data->image = image;
+    scissors_data->selection_number = 2;
+    g_signal_connect(scissors_button, "clicked", G_CALLBACK(on_selection), (gpointer)scissors_data);
 }
 
 void app_exit() {
+    gtk_style_context_remove_provider_for_display(display, GTK_STYLE_PROVIDER(provider));
+    g_object_unref(provider);
     g_object_unref(app);
     g_object_unref(builder);
 }

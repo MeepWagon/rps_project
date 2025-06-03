@@ -23,14 +23,14 @@ void get_ui_path(char* buffer, int buffer_max) {
 
 // Note: Maybe it would be better to implement a searching algorithm for this?
 // Usage: find_first_child_of_widget(parent_widget*, widget_id)
-GtkWidget* find_first_child_of_widget(GtkWidget* Container, char id) {
-    GtkWidget* child = get_widget_first_child(Container);
+GtkWidget* find_first_child_of_widget(GtkWidget* Container, const char* id) {
+    GtkWidget* child = gtk_widget_get_first_child(Container);
     if (child == NULL) {
         g_error("Container has no children");
     }
 
     while (child != NULL) {
-        if (gtk_widget_get_name(child) != id) {
+        if (strcmp(gtk_widget_get_name(child), id) == 0) {
             child = gtk_widget_get_next_sibling(child);
         } else {
             return child;
@@ -40,14 +40,14 @@ GtkWidget* find_first_child_of_widget(GtkWidget* Container, char id) {
     return NULL;
 }
 
-void load_icon(char* icon_id, char* asset_name) {
+void load_icon(GtkImage* image, const char* asset_name) {
     // Note: Eventually, I want all the images to be loaded using
     // a gresource file. Or, a macro that says to load resources
     // using a gresource file.
     int image_buffer_max = 428;
-    char* image_path_buffer[image_buffer_max];
+    char image_path_buffer[image_buffer_max];
     get_exe_dir(image_path_buffer, image_buffer_max);
     
-    char* image_path = g_build_filename(image_path_buffer, "assets", "loading.svg", NULL);
-    gtk_image_set_from_file(GTK_WIDGET(gtk_builder_get_object(builder, icon_id)), image_path);
+    char* image_path = g_build_filename(image_path_buffer, "assets", asset_name, NULL);
+    gtk_image_set_from_file(image, image_path);
 }
