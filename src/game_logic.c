@@ -4,6 +4,7 @@
 
 #include "game_logic.h"
 #include "utils.h"
+#include "types.h"
 
 int decision_array[] = {2, 0, 1};
 
@@ -32,7 +33,6 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
     GtkWidget* parent = gtk_widget_get_parent(button_data->after_element);
 
     if (game_state == false ) {
-	printf("hahah!");
 	gtk_widget_set_visible(result_label, false);
 	load_icon(button_data->after_element, "question-mark.svg");
 	g_object_set(button, "label", "Confirm Selection", NULL);
@@ -50,9 +50,6 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
 	load_icon(button_data->after_element, "scissors.svg");
     }
     
-    printf("CPU Selection: %d\n", cpu_selection);
-    printf("Player Selection: %d\n", player_selection);
-
     char* winning_status_string;
     if (player_selection == cpu_selection) {
         winning_status_string = "It's a tie!";
@@ -65,7 +62,6 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
     }
     
     if (result_label == NULL) {
-	//g_log(NULL, G_LOG_LEVEL_ERROR, "aaaa");
 	result_label = gtk_label_new(winning_status_string);
 	gtk_widget_add_css_class(result_label, "title-font");
 	gtk_box_insert_child_after(

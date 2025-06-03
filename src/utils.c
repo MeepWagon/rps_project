@@ -8,6 +8,7 @@
 // to the structure of how I should logically be separating 
 // different parts of my code. 
 
+// TODO: Methods that return path
 // Needs error checking
 // Not cross platform
 void get_exe_dir(char* buffer, int buffer_max) {

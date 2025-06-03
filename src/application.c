@@ -3,6 +3,7 @@
 #include "utils.h"
 #include "game_logic.h"
 
+// TODO: Take these out of global space, into some kind of ui instance manager
 GtkApplication* app;
 GtkWidget* window;
 GdkDisplay* display;
@@ -19,10 +20,11 @@ GtkWidget* scissors_button;
 
 void app_activate(GtkApplication *app, gpointer user_data) {
     // Get UI file path
-    int buffer_max = 428; // TODO: Change to PATH_MAX
+    int buffer_max = PATH_MAX; // TODO: Change to PATH_MAX
     char ui_path_buffer[buffer_max];
     get_ui_path(ui_path_buffer, buffer_max);
     
+    // TODO: All initialization of widgets should be done with instance manager
     // Initialize widgets
     builder = gtk_builder_new_from_file(ui_path_buffer);
     window = GTK_WIDGET(gtk_builder_get_object(builder, "window"));
@@ -59,7 +61,7 @@ void app_activate(GtkApplication *app, gpointer user_data) {
         GTK_STYLE_PROVIDER_PRIORITY_APPLICATION
     );
 
-    // Eventually, make a datatypes.c for these
+    // These need to be initialized in the asset manager
     confirm_data* data = g_new(confirm_data, 1);
     data->after_element = c_selection_icon;
     g_signal_connect(confirm_button, "clicked", G_CALLBACK(on_selection_confirm), data);
@@ -81,8 +83,8 @@ void app_activate(GtkApplication *app, gpointer user_data) {
 }
 
 void app_exit() {
-    //gtk_style_context_remove_provider_for_display(display, GTK_STYLE_PROVIDER(provider));
-    //g_object_unref(provider);
+    gtk_style_context_remove_provider_for_display(display, GTK_STYLE_PROVIDER(provider));
+    g_object_unref(provider);
     //g_object_unref(app);
-    //g_object_unref(builder);
+    g_object_unref(builder);
 }
