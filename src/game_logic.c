@@ -5,7 +5,7 @@
 #include "game_logic.h"
 #include "utils.h"
 
-int decision_array[] = {1, 2, 0};
+int decision_array[] = {2, 0, 1};
 
 int player_selection = 0;
 int cpu_selection = 0;
@@ -17,12 +17,12 @@ void on_selection(GtkWidget* button, gpointer data) {
     player_selection = select_data->selection_number;
     
     // Change selection icon
-    if (player_selection == 1) {
+    if (player_selection == 0) {
 	load_icon(select_data->image, "rock.svg");
-    } else if (player_selection == 2) {
+    } else if (player_selection == 1) {
 	load_icon(select_data->image, "paper.svg");
-    } else if (player_selection == 3) {
-	load_icon(select_data->image, "loading.svg");
+    } else if (player_selection == 2) {
+	load_icon(select_data->image, "scissors.svg");
     }
 }
 
@@ -32,6 +32,7 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
     GtkWidget* parent = gtk_widget_get_parent(button_data->after_element);
 
     if (game_state == false ) {
+	printf("hahah!");
 	gtk_widget_set_visible(result_label, false);
 	load_icon(button_data->after_element, "question-mark.svg");
 	g_object_set(button, "label", "Confirm Selection", NULL);
@@ -49,6 +50,9 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
 	load_icon(button_data->after_element, "scissors.svg");
     }
     
+    printf("CPU Selection: %d\n", cpu_selection);
+    printf("Player Selection: %d\n", player_selection);
+
     char* winning_status_string;
     if (player_selection == cpu_selection) {
         winning_status_string = "It's a tie!";
@@ -71,6 +75,7 @@ void on_selection_confirm(GtkButton* button, gpointer data) {
 	);
     } else {
 	gtk_widget_set_visible(result_label, true);
+	g_object_set(result_label, "label", winning_status_string, NULL);
     }
     
     g_object_set(button, "label", "Restart Game?", NULL);

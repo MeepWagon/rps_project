@@ -19,7 +19,7 @@ GtkWidget* scissors_button;
 
 void app_activate(GtkApplication *app, gpointer user_data) {
     // Get UI file path
-    int buffer_max = 428;
+    int buffer_max = 428; // TODO: Change to PATH_MAX
     char ui_path_buffer[buffer_max];
     get_ui_path(ui_path_buffer, buffer_max);
     
@@ -81,8 +81,8 @@ void app_activate(GtkApplication *app, gpointer user_data) {
 }
 
 void app_exit() {
-    gtk_style_context_remove_provider_for_display(display, GTK_STYLE_PROVIDER(provider));
-    g_object_unref(provider);
-    g_object_unref(app);
-    g_object_unref(builder);
+    //gtk_style_context_remove_provider_for_display(display, GTK_STYLE_PROVIDER(provider));
+    //g_object_unref(provider);
+    //g_object_unref(app);
+    //g_object_unref(builder);
 }
