@@ -5,6 +5,26 @@
 require('nvim-tree').setup()
 require('vscode').load('dark')
 require('Comment').setup()
+require("telescope").setup({
+    defaults = {
+	file_ignore_patterns = {
+	    "config/plugins"
+	}	
+    }
+})
+require('nvim-treesitter').setup()
+require('lsp_config_setup')
+vim.lsp.enable('clangd')
+require("lspconfig").clangd.setup({})
+local cmp = require('cmp')
+
+
+---- Plugin Configs ----
+-- Make parser install location inside cwd
+--local parser_install
+--require("nvim-treesitter.configs").setup({
+--    parser_install_dir = 
+--})
 
 ---- Key remappings ----
 vim.g.mapleader = " "
@@ -25,4 +45,5 @@ end)
 ---- Vim Settings ----
 vim.opt.shiftwidth = 4
 vim.opt.relativenumber = true
-vim.lsp.enable('pyright')
+--vim.lsp.enable('pyright')
+vim.lsp.enable('clangd')
