@@ -41,7 +41,7 @@ GtkWidget* find_first_child_of_widget(GtkWidget* Container, const char* id) {
     return NULL;
 }
 
-void load_icon(GtkImage* image, const char* asset_name) {
+void load_icon(GtkWidget* image, const char* asset_name) {
     // Note: Eventually, I want all the images to be loaded using
     // a gresource file. Or, a macro that says to load resources
     // using a gresource file.
@@ -50,5 +50,8 @@ void load_icon(GtkImage* image, const char* asset_name) {
     get_exe_dir(image_path_buffer, image_buffer_max);
     
     char* image_path = g_build_filename(image_path_buffer, "assets", asset_name, NULL);
-    gtk_image_set_from_file(image, image_path);
+    //g_message("%s", G_OBJECT_TYPE_NAME(image));
+    gtk_image_set_from_file(GTK_IMAGE(image), image_path);
+
+    g_free(image_path);
 }
