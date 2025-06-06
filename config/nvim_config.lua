@@ -13,11 +13,8 @@ require("telescope").setup({
     }
 })
 require('nvim-treesitter').setup()
-require('lsp_config_setup')
+--require('lsp_config_setup')
 vim.lsp.enable('clangd')
-require("lspconfig").clangd.setup({})
-local cmp = require('cmp')
-
 
 ---- Plugin Configs ----
 -- Make parser install location inside cwd
@@ -44,6 +41,5 @@ end)
 
 ---- Vim Settings ----
 vim.opt.shiftwidth = 4
+vim.opt.number = true
 vim.opt.relativenumber = true
---vim.lsp.enable('pyright')
-vim.lsp.enable('clangd')

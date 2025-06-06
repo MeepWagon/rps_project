@@ -1,2 +1,7 @@
 /build/
 /.vscode/
+/.cache/
+/.git/
+/ui/settings
+/ui/jsconfig.json
+/ui/icons.gresource.xml
